@@ -5,16 +5,14 @@ from django.urls import include, path
 from django.views.generic import RedirectView
 
 urlpatterns = [
-    path('', RedirectView.as_view(url='/api/v1/posts/')),
-    path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),
+    path("", RedirectView.as_view(url="/api/v1/posts/")),
+    path("admin/", admin.site.urls),
+    path("api/", include("api.urls")),
 ]
 
 
 if settings.DEBUG:
-    urlpatterns += static(
-        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
-    )
-    urlpatterns += static(
-        settings.STATIC_URL, document_root=settings.STATIC_ROOT
-    )
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)

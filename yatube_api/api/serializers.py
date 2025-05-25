@@ -8,25 +8,25 @@ User = get_user_model()
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
-        fields = ('id', 'title', 'slug', 'description')
+        fields = ("id", "title", "slug", "description")
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    author = serializers.ReadOnlyField(source='author.username')
+    author = serializers.ReadOnlyField(source="author.username")
     post = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Comment
-        fields = ('id', 'author', 'post', 'text', 'created')
+        fields = ("id", "author", "post", "text", "created")
 
 
 class PostSerializer(serializers.ModelSerializer):
-    author = serializers.ReadOnlyField(source='author.username')
+    author = serializers.ReadOnlyField(source="author.username")
     comments = CommentSerializer(many=True, read_only=True)
     group = GroupSerializer(read_only=True)
     image = serializers.ImageField(required=False, allow_null=True)
 
     class Meta:
         model = Post
-        fields = ('id', 'text', 'pub_date', 'author', 'image', 'group',
-                  'comments')
+        fields = ("id", "text", "pub_date", "author", "image",
+                  "group", "comments")
